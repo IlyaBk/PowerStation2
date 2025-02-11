@@ -1,0 +1,6 @@
+@PowerStation2_HostAddress = http://localhost:5033
+
+GET {{PowerStation2_HostAddress}}/login/
+Accept: application/json
+
+###

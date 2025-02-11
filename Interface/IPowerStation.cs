@@ -1,0 +1,38 @@
+﻿namespace PowerStation.Interface
+{
+    /// <summary>
+    /// Операции для работы с данными о станции
+    /// </summary>
+    internal interface IPowerStation
+    {
+        /// <summary>
+        /// Добавить новую станцию
+        /// </summary>
+        /// <param name="request">Данные о станции</param>
+        public int AddPowerStation(Models.PowerStation request);
+
+        /// <summary>
+        /// Удалить станцию
+        /// </summary>
+        /// <param name="idPowerStation">id станции</param>
+        public int DeletePowerStation(int idPowerStation);
+
+        /// <summary>
+        /// Обновить данные о станции
+        /// </summary>
+        /// <param name="idPowerStation"></param>
+        public List<Models.PowerStation> UpdatePowerStation(Models.PowerStation request);
+
+        /// <summary>
+        /// Получить данные о станции по ИД
+        /// </summary>
+        /// <param name="idPowerStation"></param>
+        public List<Models.PowerStation> GetPowerStation(int idPowerStation);
+
+        /// <summary>
+        /// Получить данные о станции по названию
+        /// </summary>
+        /// <param name="idPowerStation"></param>
+        public List<Models.PowerStation> GetPowerStation(string namePowerStation);
+    }
+}
