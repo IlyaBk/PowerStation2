@@ -21,18 +21,18 @@
         /// Обновить данные о станции
         /// </summary>
         /// <param name="request"></param>
-        public List<Models.PowerStation> UpdatePowerStation(Models.PowerStation request);
+        public Models.PowerStation UpdatePowerStation(Models.PowerStation request);
 
         /// <summary>
         /// Получить данные о станции по ИД
         /// </summary>
         /// <param name="idPowerStation"></param>
-        public List<Models.PowerStation> GetPowerStation(int idPowerStation);
+        public Models.PowerStation GetPowerStation(int idPowerStation);
 
         /// <summary>
         /// Получить данные о станции по названию
         /// </summary>
         /// <param name="namePowerStation"></param>
-        public List<Models.PowerStation> GetPowerStation(string namePowerStation);
+        public Models.PowerStation GetPowerStation(string namePowerStation);
     }
 }

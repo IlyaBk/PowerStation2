@@ -1,4 +1,5 @@
-﻿using PowerStation.Interface;
+﻿using Microsoft.EntityFrameworkCore;
+using PowerStation.Interface;
 using PowerStation.Models;
 
 namespace PowerStation.Services
@@ -13,27 +14,36 @@ namespace PowerStation.Services
 
         public PowerUnit AddPowerUnit(PowerUnit request)
         {
-            throw new NotImplementedException();
+            _context.PowerUnits.Add(request);
+            _context.SaveChanges();
+            return GetPowerUnit(request.Name);
         }
 
         public int DeletePowerUnit(int idPowerUnit)
         {
-            throw new NotImplementedException();
+            var powerUnit = GetPowerUnit(idPowerUnit);
+            _context.PowerUnits.Remove(powerUnit);
+            _context.SaveChanges();
+            return powerUnit.Id;
         }
 
-        public List<PowerUnit> GetPowerUnit(int idPowerUnit)
+        public PowerUnit GetPowerUnit(int idPowerUnit)
         {
-            throw new NotImplementedException();
+            return _context.PowerUnits.FirstOrDefault(x => x.Id == idPowerUnit)
+                ?? throw new Exception();
         }
 
-        public List<PowerUnit> GetPowerUnit(string namePowerUnit)
+        public PowerUnit GetPowerUnit(string namePowerUnit)
         {
-            throw new NotImplementedException();
+            return _context.PowerUnits.FirstOrDefault(x => x.Name == namePowerUnit)
+                ?? throw new Exception();
         }
 
-        public List<PowerUnit> UpdatePowerUnit(PowerUnit request)
+        public PowerUnit UpdatePowerUnit(PowerUnit request)
         {
-            throw new NotImplementedException();
+            _context.PowerUnit.Entry(request).State = EntityState.Modified;
+            _context.SaveChanges();
+            return GetPowerUnit(request.Name);
         }
     }
 }

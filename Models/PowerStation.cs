@@ -6,6 +6,7 @@
         public string Name { get; set; }
         public string Region { get; set; }
         public DateTime DateCreate { get; set; }
+        public ICollection<PowerUnit> PowerUnit { get; set; }
     }
 }
 

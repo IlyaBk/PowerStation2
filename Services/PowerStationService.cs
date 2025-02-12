@@ -1,4 +1,5 @@
-﻿using PowerStation.Interface;
+﻿using Microsoft.EntityFrameworkCore;
+using PowerStation.Interface;
 
 namespace PowerStation.Services
 {
@@ -12,35 +13,46 @@ namespace PowerStation.Services
 
         public Models.PowerStation AddPowerStation(Models.PowerStation request)
         {
-            throw new NotImplementedException();
+            _context.PowerStations.Add(request);
+            _context.SaveChanges();
+            return GetPowerStation(request.Name);
         }
 
         public int DeletePowerStation(int idPowerStation)
         {
-            throw new NotImplementedException();
+            var powerStations = GetPowerStation(idPowerStation);
+            _context.PowerUnits
+                .Where(x => x.IdPowerStation == powerStations.Id)
+                .ForEachAsync(pu => _context.PowerUnits.Remove(pu));
+            _context.PowerStations.Remove(powerStations);
+            _context.SaveChanges();
+            return powerStations.Id;
         }
 
-        public List<Models.PowerStation> GetPowerStation(int idPowerStation)
+        public Models.PowerStation GetPowerStation(int idPowerStation)
         {
-            return new List<Models.PowerStation>
-            {
-                new Models.PowerStation
-                {
-                    DateCreate = new DateTime(),
-                    Name = "sdadsa",
-                    Region = "sdasd"
-                }
-            };
+            return _context.PowerStations.FirstOrDefault(x => x.Id == idPowerStation)
+                ?? throw new Exception();
         }
 
-        public List<Models.PowerStation> GetPowerStation(string namePowerStation)
+        public List<Models.PowerStation> GetAllPowerStation()
         {
-            throw new NotImplementedException();
+            return _context.PowerStations.Include(x => x.PowerUnit).ToList()
+                ?? throw new Exception();
         }
 
-        public List<Models.PowerStation> UpdatePowerStation(Models.PowerStation request)
+        public Models.PowerStation GetPowerStation(string namePowerStation)
         {
-            throw new NotImplementedException();
+            return _context.PowerStations.FirstOrDefault(x => x.Name == namePowerStation)
+                ?? throw new Exception();
+        }
+
+        public Models.PowerStation UpdatePowerStation(Models.PowerStation request)
+        {
+            _context.PowerStations.Entry(request).State = EntityState.Modified;
+            _context.SaveChanges();
+            return GetPowerStation(request.Name);
+
         }
     }
 }
