@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PowerStation.Interface;
 
 namespace PowerStation.Services
@@ -11,47 +12,51 @@ namespace PowerStation.Services
             _context = context;
         }
 
-        public Models.PowerStation AddPowerStation(Models.PowerStation request)
+        public async Task<ActionResult<Models.PowerStation>> AddPowerStation(Models.PowerStation request)
         {
             _context.PowerStations.Add(request);
-            _context.SaveChanges();
-            return GetPowerStation(request.Name);
+            await _context.SaveChangesAsync();
+            return await GetPowerStation(request.Name);
         }
 
-        public int DeletePowerStation(int idPowerStation)
+        public async Task<ActionResult<int>> DeletePowerStation(int idPowerStation)
         {
-            var powerStations = GetPowerStation(idPowerStation);
-            _context.PowerUnits
+            var powerStations = GetPowerStation(idPowerStation).Result.Value;
+
+            await _context.PowerUnits
                 .Where(x => x.IdPowerStation == powerStations.Id)
                 .ForEachAsync(pu => _context.PowerUnits.Remove(pu));
+
+
             _context.PowerStations.Remove(powerStations);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return powerStations.Id;
         }
 
-        public Models.PowerStation GetPowerStation(int idPowerStation)
+        public async Task<ActionResult<Models.PowerStation>> GetPowerStation(int idPowerStation)
         {
-            return _context.PowerStations.FirstOrDefault(x => x.Id == idPowerStation)
+            return await _context.PowerStations.SingleOrDefaultAsync(x => x.Id == idPowerStation)
                 ?? throw new Exception();
         }
 
-        public List<Models.PowerStation> GetAllPowerStation()
+        public async Task<ActionResult<List<Models.PowerStation>>> GetAllPowerStation()
         {
-            return _context.PowerStations.Include(x => x.PowerUnit).ToList()
+            return await _context.PowerStations.Include(x => x.PowerUnit).ToListAsync()
                 ?? throw new Exception();
         }
 
-        public Models.PowerStation GetPowerStation(string namePowerStation)
+        public async Task<ActionResult<Models.PowerStation>> GetPowerStation(string namePowerStation)
         {
-            return _context.PowerStations.FirstOrDefault(x => x.Name == namePowerStation)
+            return await _context.PowerStations.SingleOrDefaultAsync(x => x.Name == namePowerStation)
                 ?? throw new Exception();
         }
 
-        public Models.PowerStation UpdatePowerStation(Models.PowerStation request)
+        public async Task<ActionResult<Models.PowerStation>> UpdatePowerStation(Models.PowerStation request)
         {
+
             _context.PowerStations.Entry(request).State = EntityState.Modified;
-            _context.SaveChanges();
-            return GetPowerStation(request.Name);
+            await _context.SaveChangesAsync();
+            return await GetPowerStation(request.Name);
 
         }
     }

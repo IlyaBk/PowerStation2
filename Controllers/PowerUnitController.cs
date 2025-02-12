@@ -35,7 +35,7 @@ namespace PowerStation2.Controllers
         /// <returns></returns>
         [HttpGet("GetPowerUnit{id}")]
         [Authorize(Roles = "User")]
-        public List<PowerUnit> GetPowerUnit(int idPowerUnit)
+        public Task<ActionResult<PowerUnit>> GetPowerUnit(int idPowerUnit)
         {
             return powerUnitService.GetPowerUnit(idPowerUnit);
         }
@@ -47,7 +47,7 @@ namespace PowerStation2.Controllers
         /// <returns></returns>
         [HttpGet("GetPowerUnit{name}")]
         [Authorize(Roles = "User")]
-        public List<PowerUnit> GetPowerUnit(string name)
+        public Task<ActionResult<PowerUnit>> GetPowerUnit(string name)
         {
             return powerUnitService.GetPowerUnit(name);
         }
@@ -59,7 +59,7 @@ namespace PowerStation2.Controllers
         /// <returns></returns>
         [HttpPost("AddPowerUnit")]
         [Authorize(Roles = "Admin")]
-        public PowerUnit AddPowerUnit(PowerUnit powerUnit)
+        public Task<ActionResult<PowerUnit>> AddPowerUnit(PowerUnit powerUnit)
         {
             return powerUnitService.AddPowerUnit(powerUnit);
         }
@@ -71,7 +71,7 @@ namespace PowerStation2.Controllers
         /// <returns></returns>
         [HttpPut("UpdatePowerUnit{id}")]
         [Authorize(Roles = "Admin")]
-        public List<PowerUnit> UpdatePowerUnit(PowerUnit powerUnit)
+        public Task<ActionResult<PowerUnit>> UpdatePowerUnit(PowerUnit powerUnit)
         {
             return powerUnitService.UpdatePowerUnit(powerUnit);
         }
@@ -83,7 +83,7 @@ namespace PowerStation2.Controllers
         /// <returns></returns>
         [HttpDelete("DeletePowerUnit{id}")]
         [Authorize(Roles = "Admin")]
-        public int DeletePowerUnit(int id)
+        public Task<ActionResult<int>> DeletePowerUnit(int id)
         {
             return powerUnitService.DeletePowerUnit(id);
         }

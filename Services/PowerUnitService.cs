@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PowerStation.Interface;
 using PowerStation.Models;
 
@@ -12,38 +13,38 @@ namespace PowerStation.Services
             _context = context;
         }
 
-        public PowerUnit AddPowerUnit(PowerUnit request)
+        public async Task<ActionResult<PowerUnit>> AddPowerUnit(PowerUnit request)
         {
             _context.PowerUnits.Add(request);
-            _context.SaveChanges();
-            return GetPowerUnit(request.Name);
+            await _context.SaveChangesAsync();
+            return await GetPowerUnit(request.Name);
         }
 
-        public int DeletePowerUnit(int idPowerUnit)
+        public async Task<ActionResult<int>> DeletePowerUnit(int idPowerUnit)
         {
-            var powerUnit = GetPowerUnit(idPowerUnit);
+            var powerUnit = GetPowerUnit(idPowerUnit).Result.Value;
             _context.PowerUnits.Remove(powerUnit);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return powerUnit.Id;
         }
 
-        public PowerUnit GetPowerUnit(int idPowerUnit)
+        public async Task<ActionResult<PowerUnit>> GetPowerUnit(int idPowerUnit)
         {
-            return _context.PowerUnits.FirstOrDefault(x => x.Id == idPowerUnit)
+            return await _context.PowerUnits.SingleOrDefaultAsync(x => x.Id == idPowerUnit)
                 ?? throw new Exception();
         }
 
-        public PowerUnit GetPowerUnit(string namePowerUnit)
+        public async Task<ActionResult<PowerUnit>> GetPowerUnit(string namePowerUnit)
         {
-            return _context.PowerUnits.FirstOrDefault(x => x.Name == namePowerUnit)
+            return await _context.PowerUnits.SingleOrDefaultAsync(x => x.Name == namePowerUnit)
                 ?? throw new Exception();
         }
 
-        public PowerUnit UpdatePowerUnit(PowerUnit request)
+        public async Task<ActionResult<PowerUnit>> UpdatePowerUnit(PowerUnit request)
         {
-            _context.PowerUnit.Entry(request).State = EntityState.Modified;
-            _context.SaveChanges();
-            return GetPowerUnit(request.Name);
+            _context.PowerUnits.Entry(request).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return await GetPowerUnit(request.Name);
         }
     }
 }

@@ -1,38 +1,46 @@
-﻿namespace PowerStation.Interface
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace PowerStation.Interface
 {
     /// <summary>
     /// Операции для работы с данными о станции
     /// </summary>
-    internal interface IPowerStation
+    public interface IPowerStation
     {
         /// <summary>
         /// Добавить новую станцию
         /// </summary>
         /// <param name="request">Данные о станции</param>
-        public Models.PowerStation AddPowerStation(Models.PowerStation request);
+        public Task<ActionResult<Models.PowerStation>> AddPowerStation(Models.PowerStation request);
 
         /// <summary>
         /// Удалить станцию
         /// </summary>
         /// <param name="idPowerStation">id станции</param>
-        public int DeletePowerStation(int idPowerStation);
+        public Task<ActionResult<int>> DeletePowerStation(int idPowerStation);
 
         /// <summary>
         /// Обновить данные о станции
         /// </summary>
         /// <param name="request"></param>
-        public Models.PowerStation UpdatePowerStation(Models.PowerStation request);
+        public Task<ActionResult<Models.PowerStation>> UpdatePowerStation(Models.PowerStation request);
 
         /// <summary>
         /// Получить данные о станции по ИД
         /// </summary>
         /// <param name="idPowerStation"></param>
-        public Models.PowerStation GetPowerStation(int idPowerStation);
+        public Task<ActionResult<Models.PowerStation>> GetPowerStation(int idPowerStation);
 
         /// <summary>
         /// Получить данные о станции по названию
         /// </summary>
         /// <param name="namePowerStation"></param>
-        public Models.PowerStation GetPowerStation(string namePowerStation);
+        public Task<ActionResult<Models.PowerStation>> GetPowerStation(string namePowerStation);
+
+        /// <summary>
+        /// Получить список всех станций
+        /// </summary>
+        /// <returns></returns>
+        public Task<ActionResult<List<Models.PowerStation>>> GetAllPowerStation();
     }
 }

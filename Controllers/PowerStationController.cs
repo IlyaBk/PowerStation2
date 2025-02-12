@@ -27,13 +27,20 @@ namespace PowerStation2.Controllers
             _context = context;
         }
 
+        [HttpGet("GetPowerStation")]
+        [Authorize(Roles = "User")]
+        public Task<ActionResult<List<PowerStation.Models.PowerStation>>> GetAllPowerStation()
+        {
+            return powerStationService.GetAllPowerStation();
+        }
+
         /// <summary>
         /// Получить данные о станции по ИД
         /// </summary>
         /// <param name="idPowerStation"></param>
         [HttpGet("GetPowerStationForId")]
         [Authorize(Roles = "User")]
-        public List<PowerStation.Models.PowerStation> GetPowerStation(int idPowerStation)
+        public Task<ActionResult<PowerStation.Models.PowerStation>> GetPowerStation(int idPowerStation)
         {
             return powerStationService.GetPowerStation(idPowerStation);
         }
@@ -44,7 +51,7 @@ namespace PowerStation2.Controllers
         /// <param name="namePowerStation"></param>
         [HttpGet("GetPowerStation")]
         [Authorize(Roles = "User")]
-        public List<PowerStation.Models.PowerStation> GetPowerStation(string name)
+        public Task<ActionResult<PowerStation.Models.PowerStation>> GetPowerStation(string name)
         {
             return powerStationService.GetPowerStation(name);
         }
@@ -55,7 +62,7 @@ namespace PowerStation2.Controllers
         /// <param name="request">Данные о станции</param>
         [HttpPost("AddPowerStation")]
         [Authorize(Roles = "Admin")]
-        public PowerStation.Models.PowerStation AddPowerStation(PowerStation.Models.PowerStation station)
+        public Task<ActionResult<PowerStation.Models.PowerStation>> AddPowerStation(PowerStation.Models.PowerStation station)
         {
             return powerStationService.AddPowerStation(station);
         }
@@ -66,7 +73,7 @@ namespace PowerStation2.Controllers
         /// <param name="request"></param>
         [HttpPut("UpdatePowerStation")]
         [Authorize(Roles = "Admin")]
-        public List<PowerStation.Models.PowerStation> UpdatePowerStation
+        public Task<ActionResult<PowerStation.Models.PowerStation>> UpdatePowerStation
             (PowerStation.Models.PowerStation station)
         {
             return powerStationService.UpdatePowerStation(station);
@@ -78,7 +85,7 @@ namespace PowerStation2.Controllers
         /// <param name="idPowerStation">id станции</param>
         [HttpDelete("DeletePowerStation")]
         [Authorize(Roles = "Admin")]
-        public int DeletePowerStation(int idPowerStation)
+        public Task<ActionResult<int>> DeletePowerStation(int idPowerStation)
         {
             return powerStationService.DeletePowerStation(idPowerStation);
         }
