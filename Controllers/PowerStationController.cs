@@ -27,7 +27,11 @@ namespace PowerStation2.Controllers
             _context = context;
         }
 
-        [HttpGet("GetPowerStation")]
+        /// <summary>
+        /// Получить список всех электростанций
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetAllPowerStation")]
         [Authorize(Roles = "User")]
         public Task<ActionResult<List<PowerStation.Models.PowerStation>>> GetAllPowerStation()
         {

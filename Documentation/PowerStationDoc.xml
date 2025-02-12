@@ -39,6 +39,12 @@
             </summary>
             <param name="namePowerStation"></param>
         </member>
+        <member name="M:PowerStation.Interface.IPowerStation.GetAllPowerStation">
+            <summary>
+            Получить список всех станций
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:PowerStation.Interface.IPowerUnit.AddPowerUnit(PowerStation.Models.PowerUnit)">
             <summary>
             Добавить новый энергоблок
@@ -79,6 +85,12 @@
             Контроллер для работы операций с данными о станции
             </summary>
             <param name="context"></param>
+        </member>
+        <member name="M:PowerStation2.Controllers.PowerStationController.GetAllPowerStation">
+            <summary>
+            Получить список всех электростанций
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:PowerStation2.Controllers.PowerStationController.GetPowerStation(System.Int32)">
             <summary>
@@ -167,6 +179,14 @@
         </member>
         <member name="M:PowerStation2.Migrations.Initial.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
+        </member>
+        <member name="M:PowerStation2.Services.AuthService.Login(PowerStation2.Models.LoginModel)">
+            <summary>
+            Авторизация
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
         </member>
     </members>
 </doc>

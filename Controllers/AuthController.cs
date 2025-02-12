@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PowerStation;
+using PowerStation2.Models;
+using PowerStation2.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -22,10 +23,7 @@ namespace PowerStation2.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            var user = await _context.Users
-                .Include(user => user.UserRoles)
-                .ThenInclude(ur => ur.Role)
-                .FirstOrDefaultAsync(u => u.Email == model.Email);
+            var user = new AuthService(_context).Login(model).Result.Value;
 
             if (user == null ||
                 !VerifyPassword(model.Password, user.PasswordHash))
@@ -58,12 +56,6 @@ namespace PowerStation2.Controllers
             {
                 return false;
             }
-        }
-
-        public class LoginModel
-        {
-            public string Email { get; set; }
-            public string Password { get; set; }
         }
     }
 }

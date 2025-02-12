@@ -33,7 +33,7 @@ namespace PowerStation2.Controllers
         /// </summary>
         /// <param name="idPowerUnit"></param>
         /// <returns></returns>
-        [HttpGet("GetPowerUnit{id}")]
+        [HttpGet("GetPowerUnit")]
         [Authorize(Roles = "User")]
         public Task<ActionResult<PowerUnit>> GetPowerUnit(int idPowerUnit)
         {
@@ -45,7 +45,7 @@ namespace PowerStation2.Controllers
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        [HttpGet("GetPowerUnit{name}")]
+        [HttpGet("GetPowerUnitForName")]
         [Authorize(Roles = "User")]
         public Task<ActionResult<PowerUnit>> GetPowerUnit(string name)
         {
@@ -69,7 +69,7 @@ namespace PowerStation2.Controllers
         /// </summary>
         /// <param name="powerUnit"></param>
         /// <returns></returns>
-        [HttpPut("UpdatePowerUnit{id}")]
+        [HttpPut("UpdatePowerUnit")]
         [Authorize(Roles = "Admin")]
         public Task<ActionResult<PowerUnit>> UpdatePowerUnit(PowerUnit powerUnit)
         {
@@ -81,7 +81,7 @@ namespace PowerStation2.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("DeletePowerUnit{id}")]
+        [HttpDelete("DeletePowerUnit")]
         [Authorize(Roles = "Admin")]
         public Task<ActionResult<int>> DeletePowerUnit(int id)
         {
