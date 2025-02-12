@@ -10,7 +10,7 @@ namespace PowerStation.Services
             _context = context;
         }
 
-        public int AddPowerStation(Models.PowerStation request)
+        public Models.PowerStation AddPowerStation(Models.PowerStation request)
         {
             throw new NotImplementedException();
         }
@@ -22,7 +22,15 @@ namespace PowerStation.Services
 
         public List<Models.PowerStation> GetPowerStation(int idPowerStation)
         {
-            throw new NotImplementedException();
+            return new List<Models.PowerStation>
+            {
+                new Models.PowerStation
+                {
+                    DateCreate = new DateTime(),
+                    Name = "sdadsa",
+                    Region = "sdasd"
+                }
+            };
         }
 
         public List<Models.PowerStation> GetPowerStation(string namePowerStation)

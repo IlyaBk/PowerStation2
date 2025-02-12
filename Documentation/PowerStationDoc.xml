@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PowerStation2</name>
+    </assembly>
+    <members>
+        <member name="T:PowerStation.Interface.IPowerStation">
+            <summary>
+            Операции для работы с данными о станции
+            </summary>
+        </member>
+        <member name="M:PowerStation.Interface.IPowerStation.AddPowerStation(PowerStation.Models.PowerStation)">
+            <summary>
+            Добавить новую станцию
+            </summary>
+            <param name="request">Данные о станции</param>
+        </member>
+        <member name="M:PowerStation.Interface.IPowerStation.DeletePowerStation(System.Int32)">
+            <summary>
+            Удалить станцию
+            </summary>
+            <param name="idPowerStation">id станции</param>
+        </member>
+        <member name="M:PowerStation.Interface.IPowerStation.UpdatePowerStation(PowerStation.Models.PowerStation)">
+            <summary>
+            Обновить данные о станции
+            </summary>
+            <param name="request"></param>
+        </member>
+        <member name="M:PowerStation.Interface.IPowerStation.GetPowerStation(System.Int32)">
+            <summary>
+            Получить данные о станции по ИД
+            </summary>
+            <param name="idPowerStation"></param>
+        </member>
+        <member name="M:PowerStation.Interface.IPowerStation.GetPowerStation(System.String)">
+            <summary>
+            Получить данные о станции по названию
+            </summary>
+            <param name="namePowerStation"></param>
+        </member>
+        <member name="M:PowerStation.Interface.IPowerUnit.AddPowerUnit(PowerStation.Models.PowerUnit)">
+            <summary>
+            Добавить новый энергоблок
+            </summary>
+            <param name="request">Данные о энергоблоке</param>
+        </member>
+        <member name="M:PowerStation.Interface.IPowerUnit.DeletePowerUnit(System.Int32)">
+            <summary>
+            Удалить энергоблок
+            </summary>
+            <param name="idPowerStation">id станции</param>
+        </member>
+        <member name="M:PowerStation.Interface.IPowerUnit.UpdatePowerUnit(PowerStation.Models.PowerUnit)">
+            <summary>
+            Обновить данные о энергоблоке
+            </summary>
+            <param name="request"></param>
+        </member>
+        <member name="M:PowerStation.Interface.IPowerUnit.GetPowerUnit(System.Int32)">
+            <summary>
+            Получить данные о энергоблоке по ИД
+            </summary>
+            <param name="idPowerUnit"></param>
+        </member>
+        <member name="M:PowerStation.Interface.IPowerUnit.GetPowerUnit(System.String)">
+            <summary>
+            Получить данные о энергоблоке по названию
+            </summary>
+            <param name="namePowerUnit"></param>
+        </member>
+        <member name="T:PowerStation2.Controllers.PowerStationController">
+            <summary>
+            Контроллер для работы операций с данными о станции
+            </summary>
+        </member>
+        <member name="M:PowerStation2.Controllers.PowerStationController.#ctor(PowerStation.AppDbContext)">
+            <summary>
+            Контроллер для работы операций с данными о станции
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:PowerStation2.Controllers.PowerStationController.GetPowerStation(System.Int32)">
+            <summary>
+            Получить данные о станции по ИД
+            </summary>
+            <param name="idPowerStation"></param>
+        </member>
+        <member name="M:PowerStation2.Controllers.PowerStationController.GetPowerStation(System.String)">
+            <summary>
+            Получить данные о станции по названию
+            </summary>
+            <param name="namePowerStation"></param>
+        </member>
+        <member name="M:PowerStation2.Controllers.PowerStationController.AddPowerStation(PowerStation.Models.PowerStation)">
+            <summary>
+            Добавить новую станцию
+            </summary>
+            <param name="request">Данные о станции</param>
+        </member>
+        <member name="M:PowerStation2.Controllers.PowerStationController.UpdatePowerStation(PowerStation.Models.PowerStation)">
+            <summary>
+            Обновить данные о станции
+            </summary>
+            <param name="request"></param>
+        </member>
+        <member name="M:PowerStation2.Controllers.PowerStationController.DeletePowerStation(System.Int32)">
+            <summary>
+            Удалить станцию
+            </summary>
+            <param name="idPowerStation">id станции</param>
+        </member>
+        <member name="T:PowerStation2.Controllers.PowerUnitController">
+            <summary>
+            Операции для работы с даннымы энергоблока
+            </summary>
+        </member>
+        <member name="M:PowerStation2.Controllers.PowerUnitController.#ctor(PowerStation.AppDbContext)">
+            <summary>
+            Операции для работы с даннымы энергоблока
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:PowerStation2.Controllers.PowerUnitController.GetPowerUnit(System.Int32)">
+            <summary>
+            Получить данные о энергоблоке по ИД
+            </summary>
+            <param name="idPowerUnit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PowerStation2.Controllers.PowerUnitController.GetPowerUnit(System.String)">
+            <summary>
+            Получить данные о энергоблоке по назвнию
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PowerStation2.Controllers.PowerUnitController.AddPowerUnit(PowerStation.Models.PowerUnit)">
+            <summary>
+            Добавить новый энергоблок
+            </summary>
+            <param name="powerUnit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PowerStation2.Controllers.PowerUnitController.UpdatePowerUnit(PowerStation.Models.PowerUnit)">
+            <summary>
+            Обновить данные о энергоблоке
+            </summary>
+            <param name="powerUnit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PowerStation2.Controllers.PowerUnitController.DeletePowerUnit(System.Int32)">
+            <summary>
+            Удалить энергоблок
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PowerStation2.Migrations.Initial">
+            <inheritdoc />
+        </member>
+        <member name="M:PowerStation2.Migrations.Initial.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:PowerStation2.Migrations.Initial.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:PowerStation2.Migrations.Initial.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

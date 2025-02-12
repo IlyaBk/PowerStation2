@@ -5,27 +5,33 @@ namespace PowerStation.Services
 {
     internal class PowerUnitService : IPowerUnit
     {
-        public void AddPowerUnit(PowerUnit request)
+        private readonly AppDbContext _context;
+        public PowerUnitService(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public PowerUnit AddPowerUnit(PowerUnit request)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeletePowerUnit(int idPowerStation)
+        public int DeletePowerUnit(int idPowerUnit)
         {
             throw new NotImplementedException();
         }
 
-        public PowerUnit GetPowerUnit(int idPowerUnit)
+        public List<PowerUnit> GetPowerUnit(int idPowerUnit)
         {
             throw new NotImplementedException();
         }
 
-        public PowerUnit GetPowerUnit(string namePowerUnit)
+        public List<PowerUnit> GetPowerUnit(string namePowerUnit)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdatePowerUnit(PowerUnit request)
+        public List<PowerUnit> UpdatePowerUnit(PowerUnit request)
         {
             throw new NotImplementedException();
         }

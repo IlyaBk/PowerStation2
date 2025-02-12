@@ -34,7 +34,7 @@ namespace PowerStation2.Controllers
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("your_secret_key");
+            var key = Encoding.ASCII.GetBytes("123456789123456789123456789123456789123456789");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(

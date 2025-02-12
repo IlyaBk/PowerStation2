@@ -5,33 +5,33 @@ namespace PowerStation.Interface
     internal interface IPowerUnit
     {
         /// <summary>
-        /// Добавить новую станцию
+        /// Добавить новый энергоблок
         /// </summary>
-        /// <param name="request">Данные о станции</param>
-        public void AddPowerUnit(PowerUnit request);
+        /// <param name="request">Данные о энергоблоке</param>
+        public PowerUnit AddPowerUnit(PowerUnit request);
 
         /// <summary>
-        /// Удалить станцию
+        /// Удалить энергоблок
         /// </summary>
         /// <param name="idPowerStation">id станции</param>
-        public bool DeletePowerUnit(int idPowerStation);
+        public int DeletePowerUnit(int idPowerUnit);
 
         /// <summary>
-        /// Обновить данные о станции
+        /// Обновить данные о энергоблоке
         /// </summary>
-        /// <param name="idPowerStation"></param>
-        public bool UpdatePowerUnit(PowerUnit request);
+        /// <param name="request"></param>
+        public List<PowerUnit> UpdatePowerUnit(PowerUnit request);
 
         /// <summary>
-        /// Получить данные о станции по ИД
+        /// Получить данные о энергоблоке по ИД
         /// </summary>
-        /// <param name="idPowerStation"></param>
-        public PowerUnit GetPowerUnit(int idPowerUnit);
+        /// <param name="idPowerUnit"></param>
+        public List<PowerUnit> GetPowerUnit(int idPowerUnit);
 
         /// <summary>
-        /// Получить данные о станции по названию
+        /// Получить данные о энергоблоке по названию
         /// </summary>
-        /// <param name="idPowerStation"></param>
-        public PowerUnit GetPowerUnit(string namePowerUnit);
+        /// <param name="namePowerUnit"></param>
+        public List<PowerUnit> GetPowerUnit(string namePowerUnit);
     }
 }

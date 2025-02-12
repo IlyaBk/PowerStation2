@@ -9,7 +9,7 @@
         /// Добавить новую станцию
         /// </summary>
         /// <param name="request">Данные о станции</param>
-        public int AddPowerStation(Models.PowerStation request);
+        public Models.PowerStation AddPowerStation(Models.PowerStation request);
 
         /// <summary>
         /// Удалить станцию
@@ -20,7 +20,7 @@
         /// <summary>
         /// Обновить данные о станции
         /// </summary>
-        /// <param name="idPowerStation"></param>
+        /// <param name="request"></param>
         public List<Models.PowerStation> UpdatePowerStation(Models.PowerStation request);
 
         /// <summary>
@@ -32,7 +32,7 @@
         /// <summary>
         /// Получить данные о станции по названию
         /// </summary>
-        /// <param name="idPowerStation"></param>
+        /// <param name="namePowerStation"></param>
         public List<Models.PowerStation> GetPowerStation(string namePowerStation);
     }
 }
