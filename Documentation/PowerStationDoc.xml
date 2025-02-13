@@ -75,6 +75,17 @@
             </summary>
             <param name="namePowerUnit"></param>
         </member>
+        <member name="T:PowerStation2.Controllers.AuthController">
+            <summary>
+            Контроллер авторизации
+            </summary>
+        </member>
+        <member name="M:PowerStation2.Controllers.AuthController.#ctor(PowerStation.AppDbContext)">
+            <summary>
+            Контроллер авторизации
+            </summary>
+            <param name="context"></param>
+        </member>
         <member name="T:PowerStation2.Controllers.PowerStationController">
             <summary>
             Контроллер для работы операций с данными о станции
@@ -122,6 +133,14 @@
             </summary>
             <param name="idPowerStation">id станции</param>
         </member>
+        <member name="M:PowerStation2.Controllers.PowerStationController.ErrorHandlingWrapper``1(System.Func{System.Threading.Tasks.Task{Microsoft.AspNetCore.Mvc.ActionResult{``0}}})">
+            <summary>
+            Обработчик исключений
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
         <member name="T:PowerStation2.Controllers.PowerUnitController">
             <summary>
             Операции для работы с даннымы энергоблока
@@ -166,6 +185,14 @@
             Удалить энергоблок
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PowerStation2.Controllers.PowerUnitController.ErrorHandlingWrapper``1(System.Func{System.Threading.Tasks.Task{Microsoft.AspNetCore.Mvc.ActionResult{``0}}})">
+            <summary>
+            Обработчик исключений
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="action"></param>
             <returns></returns>
         </member>
         <member name="T:PowerStation2.Migrations.Initial">

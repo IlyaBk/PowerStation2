@@ -35,9 +35,10 @@ namespace PowerStation2.Controllers
         /// <returns></returns>
         [HttpGet("GetPowerUnit")]
         [Authorize(Roles = "User")]
-        public Task<ActionResult<PowerUnit>> GetPowerUnit(int idPowerUnit)
+        public async Task<ActionResult<PowerUnit>> GetPowerUnit(int idPowerUnit)
         {
-            return powerUnitService.GetPowerUnit(idPowerUnit);
+            return await ErrorHandlingWrapper(async ()
+                => await powerUnitService.GetPowerUnit(idPowerUnit));
         }
 
         /// <summary>
@@ -47,9 +48,10 @@ namespace PowerStation2.Controllers
         /// <returns></returns>
         [HttpGet("GetPowerUnitForName")]
         [Authorize(Roles = "User")]
-        public Task<ActionResult<PowerUnit>> GetPowerUnit(string name)
+        public async Task<ActionResult<PowerUnit>> GetPowerUnit(string name)
         {
-            return powerUnitService.GetPowerUnit(name);
+            return await ErrorHandlingWrapper(async ()
+                => await powerUnitService.GetPowerUnit(name));
         }
 
         /// <summary>
@@ -59,9 +61,10 @@ namespace PowerStation2.Controllers
         /// <returns></returns>
         [HttpPost("AddPowerUnit")]
         [Authorize(Roles = "Admin")]
-        public Task<ActionResult<PowerUnit>> AddPowerUnit(PowerUnit powerUnit)
+        public async Task<ActionResult<PowerUnit>> AddPowerUnit(PowerUnit powerUnit)
         {
-            return powerUnitService.AddPowerUnit(powerUnit);
+            return await ErrorHandlingWrapper(async ()
+                => await powerUnitService.AddPowerUnit(powerUnit));
         }
 
         /// <summary>
@@ -71,9 +74,10 @@ namespace PowerStation2.Controllers
         /// <returns></returns>
         [HttpPut("UpdatePowerUnit")]
         [Authorize(Roles = "Admin")]
-        public Task<ActionResult<PowerUnit>> UpdatePowerUnit(PowerUnit powerUnit)
+        public async Task<ActionResult<PowerUnit>> UpdatePowerUnit(PowerUnit powerUnit)
         {
-            return powerUnitService.UpdatePowerUnit(powerUnit);
+            return await ErrorHandlingWrapper(async ()
+                => await powerUnitService.UpdatePowerUnit(powerUnit));
         }
 
         /// <summary>
@@ -83,9 +87,28 @@ namespace PowerStation2.Controllers
         /// <returns></returns>
         [HttpDelete("DeletePowerUnit")]
         [Authorize(Roles = "Admin")]
-        public Task<ActionResult<int>> DeletePowerUnit(int id)
+        public async Task<ActionResult<int>> DeletePowerUnit(int id)
         {
-            return powerUnitService.DeletePowerUnit(id);
+            return await ErrorHandlingWrapper(async ()
+                => await powerUnitService.DeletePowerUnit(id));
+        }
+
+        /// <summary>
+        /// Обработчик исключений
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public async Task<ActionResult<T>> ErrorHandlingWrapper<T>(Func<Task<ActionResult<T>>> action)
+        {
+            try
+            {
+                return Ok(await action());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }

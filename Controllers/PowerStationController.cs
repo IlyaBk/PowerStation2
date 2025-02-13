@@ -33,9 +33,10 @@ namespace PowerStation2.Controllers
         /// <returns></returns>
         [HttpGet("GetAllPowerStation")]
         [Authorize(Roles = "User")]
-        public Task<ActionResult<List<PowerStation.Models.PowerStation>>> GetAllPowerStation()
+        public async Task<ActionResult<List<PowerStation.Models.PowerStation>>> GetAllPowerStation()
         {
-            return powerStationService.GetAllPowerStation();
+            return await ErrorHandlingWrapper(async ()
+            => await powerStationService.GetAllPowerStation());
         }
 
         /// <summary>
@@ -44,9 +45,10 @@ namespace PowerStation2.Controllers
         /// <param name="idPowerStation"></param>
         [HttpGet("GetPowerStationForId")]
         [Authorize(Roles = "User")]
-        public Task<ActionResult<PowerStation.Models.PowerStation>> GetPowerStation(int idPowerStation)
+        public async Task<ActionResult<PowerStation.Models.PowerStation>> GetPowerStation(int idPowerStation)
         {
-            return powerStationService.GetPowerStation(idPowerStation);
+            return await ErrorHandlingWrapper(async ()
+                => await powerStationService.GetPowerStation(idPowerStation));
         }
 
         /// <summary>
@@ -55,9 +57,10 @@ namespace PowerStation2.Controllers
         /// <param name="namePowerStation"></param>
         [HttpGet("GetPowerStation")]
         [Authorize(Roles = "User")]
-        public Task<ActionResult<PowerStation.Models.PowerStation>> GetPowerStation(string name)
+        public async Task<ActionResult<PowerStation.Models.PowerStation>> GetPowerStation(string name)
         {
-            return powerStationService.GetPowerStation(name);
+            return await ErrorHandlingWrapper(async ()
+                => await powerStationService.GetPowerStation(name));
         }
 
         /// <summary>
@@ -66,9 +69,10 @@ namespace PowerStation2.Controllers
         /// <param name="request">Данные о станции</param>
         [HttpPost("AddPowerStation")]
         [Authorize(Roles = "Admin")]
-        public Task<ActionResult<PowerStation.Models.PowerStation>> AddPowerStation(PowerStation.Models.PowerStation station)
+        public async Task<ActionResult<PowerStation.Models.PowerStation>> AddPowerStation(PowerStation.Models.PowerStation station)
         {
-            return powerStationService.AddPowerStation(station);
+            return await ErrorHandlingWrapper(async ()
+                => await powerStationService.AddPowerStation(station));
         }
 
         /// <summary>
@@ -77,10 +81,11 @@ namespace PowerStation2.Controllers
         /// <param name="request"></param>
         [HttpPut("UpdatePowerStation")]
         [Authorize(Roles = "Admin")]
-        public Task<ActionResult<PowerStation.Models.PowerStation>> UpdatePowerStation
+        public async Task<ActionResult<PowerStation.Models.PowerStation>> UpdatePowerStation
             (PowerStation.Models.PowerStation station)
         {
-            return powerStationService.UpdatePowerStation(station);
+            return await ErrorHandlingWrapper(async ()
+                => await powerStationService.UpdatePowerStation(station));
         }
 
         /// <summary>
@@ -89,9 +94,28 @@ namespace PowerStation2.Controllers
         /// <param name="idPowerStation">id станции</param>
         [HttpDelete("DeletePowerStation")]
         [Authorize(Roles = "Admin")]
-        public Task<ActionResult<int>> DeletePowerStation(int idPowerStation)
+        public async Task<ActionResult<int>> DeletePowerStation(int idPowerStation)
         {
-            return powerStationService.DeletePowerStation(idPowerStation);
+            return await ErrorHandlingWrapper(async ()
+                => await powerStationService.DeletePowerStation(idPowerStation));
+        }
+
+        /// <summary>
+        /// Обработчик исключений
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public async Task<ActionResult<T>> ErrorHandlingWrapper<T>(Func<Task<ActionResult<T>>> action)
+        {
+            try
+            {
+                return Ok(await action());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }
